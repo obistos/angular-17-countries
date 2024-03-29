@@ -1,0 +1,20 @@
+[
+    {
+        "username": "admin",
+        "email": "admin@magilla.io",
+        "password": "Pass11",
+        "role": "Admin"
+    },
+    {
+        "username": "obed",
+        "email": "obed@magilla.io",
+        "password": "OR1",
+        "role": "Admin"
+    },
+    {
+        "username": "operator",
+        "email": "operator@magilla.io",
+        "password": "Pass12",
+        "role": "Operator"
+    }
+]

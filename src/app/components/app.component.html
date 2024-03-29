@@ -1,0 +1,25 @@
+<div class="nav">
+  <input type="checkbox" id="nav-check">
+  <div class="nav-header">
+    <div class="nav-title">
+      Magilla
+    </div>
+  </div>
+  <div class="nav-btn">
+    <label for="nav-check">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+  </div>
+
+  <div class="nav-links">
+    <a routerLink="/countries">Countries</a>
+    <a *ngIf="!authService.isAuthenticated()" routerLink="/login">Login</a>
+    <a *ngIf="authService.isAuthenticated()" href="#" (click)="logout()">Logout</a>
+  </div>
+</div>
+
+<section class="content">
+  <router-outlet />
+</section>

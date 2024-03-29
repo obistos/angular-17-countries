@@ -1,0 +1,17 @@
+<mat-grid-list cols="4" [rowHeight]="200">
+  <mat-grid-tile *ngFor="let item of data">
+    <mat-card>
+      <mat-card-header>
+         <div>{{item.flag}}</div>
+         <mat-card-title>{{ item.name.common }}</mat-card-title>
+         <mat-card-subtitle>{{ item.name.official }}</mat-card-subtitle>
+         <mat-card-subtitle>Population: {{ item.population }}</mat-card-subtitle>
+         <mat-card-subtitle *ngFor="let cap of item.capital">Capital: {{ cap }}</mat-card-subtitle>
+       </mat-card-header>
+       <mat-card-actions align="end">
+         <button *ngIf="authService.isAdminUser()" mat-button routerLink="/country/{{item.cca2.toLowerCase()}}/edit">EDIT</button>
+         <button mat-button routerLink="/country/{{item.cca2.toLowerCase()}}/view">VIEW</button>
+       </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
