@@ -2,6 +2,13 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
 
+## Pre-requisite
+
+Please make sure that you have nodejs installed on your machine.
+
+## Installation
+Run `npm install` after cloning this project.
+
 ## Mock Data
 
 I have placed the user details inside src -> app -> assets -> users.json
