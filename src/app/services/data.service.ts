@@ -9,6 +9,7 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+  // Get
   getAllCountries(): Observable<any> {
     return this.http.get('https://restcountries.com/v3.1/all?fields=name,capital,currencies,region,population,flag,cca2');
   }
@@ -19,5 +20,15 @@ export class DataService {
 
   getUsers(): Observable<any> {
     return this.http.get('./assets/users.json');
+  }
+
+  // Update
+  updateCountryByID(Id: string, data: any): Observable<any> {
+    return this.http.put(`https://restcountries.com/v3.1/alpha/${Id}`, data);
+  }
+
+  // Delete
+  deleteCountryByID(Id: string): Observable<any> {
+    return this.http.delete(`https://restcountries.com/v3.1/alpha/${Id.toLowerCase()}`);
   }
 }

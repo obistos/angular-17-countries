@@ -11,6 +11,7 @@ import { DataService } from './data.service';
 export class AuthService {
   constructor(private dataService: DataService, private router: Router) { }
 
+  // Login would normally be a Post method which return the JWT token from the Backend
   login(username: string, password: string) {
     this.dataService.getUsers()
     .subscribe((results) => {
@@ -30,6 +31,7 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  // Token creation would normally take place in the Backend
   createJWTToken(details: string) {
     const header = {
       "alg": "HS256",

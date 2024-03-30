@@ -1,17 +1,29 @@
-<mat-grid-list cols="4" [rowHeight]="200">
-  <mat-grid-tile *ngFor="let item of data">
-    <mat-card>
-      <mat-card-header>
-         <div>{{item.flag}}</div>
-         <mat-card-title>{{ item.name.common }}</mat-card-title>
-         <mat-card-subtitle>{{ item.name.official }}</mat-card-subtitle>
-         <mat-card-subtitle>Population: {{ item.population }}</mat-card-subtitle>
-         <mat-card-subtitle *ngFor="let cap of item.capital">Capital: {{ cap }}</mat-card-subtitle>
-       </mat-card-header>
-       <mat-card-actions align="end">
-         <button *ngIf="authService.isAdminUser()" mat-button routerLink="/country/{{item.cca2.toLowerCase()}}/edit">EDIT</button>
-         <button mat-button routerLink="/country/{{item.cca2.toLowerCase()}}/view">VIEW</button>
-       </mat-card-actions>
-    </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <mat-form-field appearance="fill">
+        <mat-label>Search by country</mat-label>
+        <input matInput type="text" [(ngModel)]="searchText">
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-grid-list cols="3" [rowHeight]="200">
+    <mat-grid-tile *ngFor="let item of countries | filter: searchText">
+      <mat-card>
+        <mat-card-header>
+          <div class="flag">{{item.flag}}</div>
+          <mat-card-title>{{ item.name.common }}</mat-card-title>
+          <mat-card-subtitle>{{ item.name.official }}</mat-card-subtitle>
+          <mat-card-subtitle>Region: {{ item.region }}</mat-card-subtitle>
+          <mat-card-subtitle>Capital: {{ item.capital[0] }}</mat-card-subtitle>
+          <mat-card-subtitle>Population: {{ item.population }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions align="end">
+          <button mat-button routerLink="/country/{{item.cca2.toLowerCase()}}/view">VIEW</button>
+          <button *ngIf="authService.isAdminUser()" mat-button routerLink="/country/{{item.cca2.toLowerCase()}}/edit">EDIT</button>
+          <button *ngIf="authService.isAdminUser()" mat-button (click)="confirmDeletion(item)">DELETE</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

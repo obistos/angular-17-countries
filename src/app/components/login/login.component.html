@@ -1,16 +1,28 @@
-<div class="container">
-    <div class="row justify-content-center mt-5">
-      <div class="col-md-6">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 mt-5">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" formControlName="username" placeholder="Enter username">
+          <mat-form-field appearance="fill">
+            <mat-label> Username </mat-label>
+            <input matInput maxlength="15" type="text" placeholder="Type in your username" formControlName="username"
+              #usernameInput>
+            @if (loginForm.get('username')?.hasError) {
+            <mat-error>{{errorMessage}}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label> Password </mat-label>
+            <input matInput maxlength="15" type="password" placeholder="Type in your password"
+              formControlName="password" #passwordInput>
+            @if (loginForm.get('password')?.hasError) {
+            <mat-error>{{errorMessage}}</mat-error>
+            }
+          </mat-form-field>
+
+          <div class="form-element">
+            <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">Submit Form</button>
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
-          </div>
-          <button type="submit" class="btn btn-primary" style="margin-top: 6px;">Login</button>
         </form>
       </div>
     </div>

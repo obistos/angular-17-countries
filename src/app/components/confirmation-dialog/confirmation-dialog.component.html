@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Confirm deletion</h2>
+<mat-dialog-content>
+    <p>Are you sure you want to delete {{data.name.common}}?</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button (click)="onYesClick(data)" cdkFocusInitial>Yes</button>
+  </mat-dialog-actions>
