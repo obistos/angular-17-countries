@@ -99,6 +99,7 @@
               <li [ngClass]="country.altSpellings && country.altSpellings.length>5 ? 'content-list' : ''"
                 *ngFor="let item of country.altSpellings">{{item}}</li>
             </ul>
+            <p class="no-data" *ngIf="!country.altSpellings">Data not provided for this topic.</p>
           </mat-card-content>
         </mat-card>
 
@@ -112,6 +113,7 @@
             <ul>
               <li [ngClass]="languages.length>5 ? 'content-list' : ''" *ngFor="let item of languages">{{item}}</li>
             </ul>
+            <p class="no-data" *ngIf="languages.length === 0">Data not provided for this topic.</p>
           </mat-card-content>
         </mat-card>
       </div>
@@ -128,6 +130,7 @@
               <li [ngClass]="country.borders && country.borders.length>5 ? 'content-list' : ''"
                 *ngFor="let item of country.borders">{{item}}</li>
             </ul>
+            <p class="no-data" *ngIf="!country.borders">Data not provided for this topic.</p>
           </mat-card-content>
         </mat-card>
 
@@ -144,6 +147,7 @@
               <li><a href="{{country.maps?.googleMaps}}" routerLinkActive="router-link-active" target="_blank">Google
                   Maps</a></li>
             </ul>
+            <p class="no-data" *ngIf="!country.maps">Data not provided for this topic.</p>
           </mat-card-content>
         </mat-card>
       </div>
