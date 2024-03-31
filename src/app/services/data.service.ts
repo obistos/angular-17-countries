@@ -11,7 +11,7 @@ export class DataService {
 
   // Get
   getAllCountries(): Observable<any> {
-    return this.http.get('https://restcountries.com/v3.1/all?fields=name,capital,currencies,region,population,flag,cca2');
+    return this.http.get('https://restcountries.com/v3.1/all?fields=name,capital,currencies,region,population,flag,cca2,flags');
   }
 
   getCountryByID(Id: string): Observable<any> {

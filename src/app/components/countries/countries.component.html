@@ -11,7 +11,7 @@
     <mat-grid-tile *ngFor="let item of countries | filter: searchText">
       <mat-card>
         <mat-card-header>
-          <div class="flag">{{item.flag}}</div>
+          <div class="flag"><img src="{{item.flags?.png}}" alt="{{item.flags?.alt}}" width="20"></div>
           <mat-card-title>{{ item.name.common }}</mat-card-title>
           <mat-card-subtitle>{{ item.name.official }}</mat-card-subtitle>
           <mat-card-subtitle><span>Region:</span> {{ item.region }}</mat-card-subtitle>
