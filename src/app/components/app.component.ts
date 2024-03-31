@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule, DOCUMENT, ViewportScroller } from '@angular/common';
+import { Component, HostListener, AfterViewInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { fromEvent, Observable, map } from 'rxjs';
+import { of } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -29,23 +29,29 @@ import { ScrollComponent } from '../components/scroll/scroll.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'magilla';
+export class AppComponent implements AfterViewInit {
+  title = 'Magilla';
+  showScroll$ = of(false);
   
   constructor(public authService: AuthService) {}
-  
-  private readonly document = inject(DOCUMENT);
-  private readonly viewport = inject(ViewportScroller);
 
-  readonly showScroll$: Observable<boolean> = fromEvent(
-    this.document,
-    'scroll'
-  ).pipe(
-    map(() => this.viewport.getScrollPosition()?.[1] > 0)
-  );
+  @HostListener('document:scroll', ['$event'])
+    onScroll() {
+      const pos = window.scrollY;
+      if(pos > 300) this.showScroll$ = of(true);
+      else this.showScroll$ = of(false);
+  }
+
+  ngAfterViewInit(): void {
+    this.onScrollToTop();
+  }
 
   onScrollToTop(): void {
-    this.viewport.scrollToPosition([0, 0]);
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
   }
   
   logout() {

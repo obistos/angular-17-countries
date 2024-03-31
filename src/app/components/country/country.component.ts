@@ -1,5 +1,5 @@
-import { Component, OnDestroy, inject } from '@angular/core';
-import { CommonModule, ViewportScroller } from '@angular/common';
+import { Component, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
@@ -41,10 +41,8 @@ export class CountryComponent implements OnDestroy {
   saveCountry: Country;
   path = '';
   
-  private readonly viewport = inject(ViewportScroller);
-  
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private dataService: DataService, 
     private route: ActivatedRoute, 
     public authService: AuthService,
@@ -62,7 +60,6 @@ export class CountryComponent implements OnDestroy {
       if(res.length>0) {
         this.country = res[0];
         this.languages = Object.values(res[0].languages) ?? [];
-        this.viewport.scrollToPosition([0,0]);
       }
     });
 
