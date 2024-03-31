@@ -46,6 +46,7 @@ export class CountryComponent implements OnDestroy {
     ) {
     this.country = history.state;
     this.saveCountry = history.state;
+    
     const url = this.route.snapshot.url;
     this.path = url[url.length-1].path;
 
@@ -60,11 +61,10 @@ export class CountryComponent implements OnDestroy {
 
     this.form = this.fb.group ({
       name: new FormControl('', [Validators.required]),
-      currencies: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
       capital: new FormControl('', [Validators.required]),
-      cca2: new FormControl('', [Validators.required]),
-      flag: new FormControl('', [Validators.required]),
       region: new FormControl('', [Validators.required]),
+      subregion: new FormControl('', [Validators.required]),
       population: new FormControl('', [Validators.required])
     });
 
@@ -73,6 +73,11 @@ export class CountryComponent implements OnDestroy {
     .subscribe((values) => {
       this.updateErrorMessage();
       this.saveCountry.name.common = values.name;
+      this.saveCountry.name.official = values.description;
+      this.saveCountry.capital = [values.capital];
+      this.saveCountry.region = values.region;
+      this.saveCountry.subregion = values.subregion;
+      this.saveCountry.population = values.population;
     })
   }
 
@@ -91,11 +96,10 @@ export class CountryComponent implements OnDestroy {
 
   updateErrorMessage() {
     if (this.form.get('name')?.hasError('required')) this.errorMessage = 'You must enter a value';
-    if (this.form.get('currencies')?.hasError('required')) this.errorMessage = 'You must enter a value';
+    if (this.form.get('description')?.hasError('required')) this.errorMessage = 'You must enter a value';
     if (this.form.get('capital')?.hasError('required')) this.errorMessage = 'You must enter a value';
-    if (this.form.get('cca2')?.hasError('required')) this.errorMessage = 'You must enter a value';
-    if (this.form.get('flag')?.hasError('required')) this.errorMessage = 'You must enter a value';
     if (this.form.get('region')?.hasError('required')) this.errorMessage = 'You must enter a value';
+    if (this.form.get('subregion')?.hasError('required')) this.errorMessage = 'You must enter a value';
     if (this.form.get('population')?.hasError('required')) this.errorMessage = 'You must enter a value';
     else this.errorMessage = '';
   }

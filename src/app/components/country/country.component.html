@@ -1,5 +1,12 @@
 <div class="container" *ngIf="path === 'edit'; else viewInfo">
-  <h2>Edit {{country.name.common}}</h2>
+  <div class="row">
+    <div class="col-md-10">
+      <h2>Edit {{country.name.official}}</h2>
+    </div>
+    <div class="col-md-2 d-flex justify-content-end pe-3">
+      <button mat-flat-button color="primary" routerLink="/country/{{country.cca2.toLowerCase()}}/view" [state]="country">View Country</button>
+    </div>
+  </div>
   <form [formGroup]="form" (ngSubmit)="saveDetails()">
     <mat-form-field appearance="fill">
       <mat-label> Name </mat-label>
@@ -9,10 +16,10 @@
       }
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label> Currencies </mat-label>
-      <input matInput maxlength="15" type="text" placeholder="Type in the currencies" formControlName="currencies"
-        #currenciesInput>
-      @if (form.get('currencies')?.hasError) {
+      <mat-label> Description </mat-label>
+      <input matInput maxlength="15" type="text" placeholder="Type in the description" formControlName="description"
+        #descriptionInput>
+      @if (form.get('description')?.hasError) {
       <mat-error>{{errorMessage}}</mat-error>
       }
     </mat-form-field>
@@ -25,16 +32,10 @@
       }
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label> Cca2 </mat-label>
-      <input matInput maxlength="15" type="text" placeholder="Type in the cca2" formControlName="cca2" #cca2Input>
-      @if (form.get('cca2')?.hasError) {
-      <mat-error>{{errorMessage}}</mat-error>
-      }
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label> Flag </mat-label>
-      <input matInput maxlength="15" type="text" placeholder="Type in the flag" formControlName="flag" #flagInput>
-      @if (form.get('flag')?.hasError) {
+      <mat-label> Population </mat-label>
+      <input matInput maxlength="15" type="text" placeholder="Type in the population" formControlName="population"
+        #populationInput>
+      @if (form.get('population')?.hasError) {
       <mat-error>{{errorMessage}}</mat-error>
       }
     </mat-form-field>
@@ -46,10 +47,9 @@
       }
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label> Population </mat-label>
-      <input matInput maxlength="15" type="text" placeholder="Type in the population" formControlName="population"
-        #populationInput>
-      @if (form.get('population')?.hasError) {
+      <mat-label> Sub-Region </mat-label>
+      <input matInput maxlength="15" type="text" placeholder="Type in the subregion" formControlName="subregion" #subregionInput>
+      @if (form.get('subregion')?.hasError) {
       <mat-error>{{errorMessage}}</mat-error>
       }
     </mat-form-field>
@@ -62,7 +62,14 @@
 
 <ng-template #viewInfo>
   <div class="container">
-    <h2>{{country.name.official}}</h2>
+    <div class="row">
+      <div class="col-md-10">
+        <h2>Edit {{country.name.official}}</h2>
+      </div>
+      <div class="col-md-2 d-flex justify-content-end pe-3">
+        <button mat-flat-button color="primary" routerLink="/country/{{country.cca2.toLowerCase()}}/edit" [state]="country">Edit Country</button>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-6">
         <img class="country-img" src="{{country.flags?.svg}}" alt="{{country.name.official}}" width="100%">
