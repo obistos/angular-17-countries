@@ -1,22 +1,33 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <mat-form-field appearance="fill">
         <mat-label>Search by country</mat-label>
         <input matInput type="text" [(ngModel)]="searchText">
       </mat-form-field>
     </div>
+    <div class="col-md-3">
+      <mat-form-field>
+        <mat-label>Filter by</mat-label>
+        <mat-select (valueChange)="sortBy($event)" [(ngModel)]="filterText">
+          <mat-option value="country">Country</mat-option>
+          <mat-option value="region">Region</mat-option>
+          <mat-option value="population">Population</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
-  <mat-grid-list cols="3" [rowHeight]="200">
+  <mat-grid-list cols="3" [rowHeight]="280">
     <mat-grid-tile *ngFor="let item of countries | filter: searchText">
       <mat-card>
         <mat-card-header>
-          <div class="flag"><img src="{{item.flags?.png}}" alt="{{item.flags?.alt}}" width="20"></div>
+          <div class="flag"><img src="{{item.flags?.png}}" alt="{{item.flags?.alt}}" width="50"></div>
           <mat-card-title>{{ item.name.common }}</mat-card-title>
           <mat-card-subtitle>{{ item.name.official }}</mat-card-subtitle>
           <mat-card-subtitle><span>Region:</span> {{ item.region }}</mat-card-subtitle>
           <mat-card-subtitle><span>Capital:</span> {{ item.capital[0] }}</mat-card-subtitle>
           <mat-card-subtitle><span>Population:</span> {{ item.population }}</mat-card-subtitle>
+          <mat-card-subtitle><span>Currency:</span> {{ item.currencies ? getCurrency(item.currencies) : '' }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-actions align="end">
           <button mat-button routerLink="/country/{{item.cca2.toLowerCase()}}/view" [state]="item">VIEW</button>

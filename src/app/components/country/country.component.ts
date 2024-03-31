@@ -1,5 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, inject } from '@angular/core';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { DataService } from '../../services/data.service';
 import { Country } from '../../interfaces/country.interface';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-country',
@@ -39,12 +40,15 @@ export class CountryComponent implements OnDestroy {
   languages: any = [];
   saveCountry: Country;
   path = '';
-
+  
+  private readonly viewport = inject(ViewportScroller);
+  
   constructor(
     private fb: FormBuilder, 
     private dataService: DataService, 
     private route: ActivatedRoute, 
-    public authService: AuthService
+    public authService: AuthService,
+    private snackBar: MatSnackBar
     ) {
     this.country = history.state;
     this.saveCountry = history.state;
@@ -58,16 +62,17 @@ export class CountryComponent implements OnDestroy {
       if(res.length>0) {
         this.country = res[0];
         this.languages = Object.values(res[0].languages) ?? [];
+        this.viewport.scrollToPosition([0,0]);
       }
     });
 
     this.form = this.fb.group ({
-      name: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      capital: new FormControl('', [Validators.required]),
-      region: new FormControl('', [Validators.required]),
-      subregion: new FormControl('', [Validators.required]),
-      population: new FormControl('', [Validators.required])
+      name: new FormControl(this.country.name.common, [Validators.required]),
+      description: new FormControl(this.country.name.official, [Validators.required]),
+      capital: new FormControl(this.country.capital, [Validators.required]),
+      region: new FormControl(this.country.region, [Validators.required]),
+      subregion: new FormControl(this.country.subregion, [Validators.required]),
+      population: new FormControl(this.country.population, [Validators.required])
     });
 
     this.form.valueChanges
@@ -104,7 +109,26 @@ export class CountryComponent implements OnDestroy {
   }
 
   saveDetails(): void {
-    this.dataService.updateCountryByID(this.country.cca2, this.saveCountry).subscribe()
+    this.dataService.updateCountryByID(this.country.cca2, this.saveCountry)
+    .pipe(takeUntil(this.onDestroy$))
+    .subscribe({
+      next: value => {
+        if(value) {
+          this.snackBar.open('Saved successfully.', '', {
+            duration: 5000,
+            panelClass: ['success-snackbar']
+          })
+        }
+      },
+      error: value => {
+        if(value) {
+          this.snackBar.open('Failed to save.', '', {
+            duration: 5000,
+            panelClass: ['fail-snackbar']
+          })
+        }
+      }
+   });
   }
 
   updateErrorMessage() {

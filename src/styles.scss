@@ -9,3 +9,15 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-mdc-snack-bar-container.fail-snackbar {
+  .mdc-snackbar__surface {
+    background-color: #f90000;
+  }
+}
+
+.mat-mdc-snack-bar-container.success-snackbar {
+  .mdc-snackbar__surface {
+    background-color: #17be3b;
+  }
+}
