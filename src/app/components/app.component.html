@@ -25,3 +25,5 @@
 <section class="main-content">
   <router-outlet />
 </section>
+
+<app-scroll *ngIf="showScroll$ | async" (scrollToTop)="onScrollToTop()"></app-scroll>
