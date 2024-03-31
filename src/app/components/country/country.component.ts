@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -8,38 +8,23 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
 
 import { DataService } from '../../services/data.service';
 import { Country } from '../../interfaces/country.interface';
-
-const emptyName = {
-  common: '',
-  official: '',
-  nativeName: {}
-}
-const emptyCountry = {
-  name: emptyName,
-  currencies: {},
-  capital: [],
-  cca2: '',
-  flag: '',
-  region: '',
-  population: '',
-  continents: []
-} as Country
 
 @Component({
   selector: 'app-country',
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatExpansionModule
+    MatCardModule
   ],
   templateUrl: './country.component.html',
   styleUrl: './country.component.scss'
@@ -49,9 +34,9 @@ export class CountryComponent implements OnDestroy {
   form: FormGroup;
   appearance: MatFormFieldAppearance = 'fill';
   errorMessage = '';
-  country: any = [];
+  country: Country;
   languages: any = [];
-  saveCountry: Country = emptyCountry;
+  saveCountry: Country;
   path = '';
 
   constructor(
@@ -59,14 +44,18 @@ export class CountryComponent implements OnDestroy {
     private dataService: DataService, 
     private route: ActivatedRoute
     ) {
+    this.country = history.state;
+    this.saveCountry = history.state;
     const url = this.route.snapshot.url;
     this.path = url[url.length-1].path;
 
     this.dataService.getCountryByID(this.route.snapshot.params['id'])
     .pipe(takeUntil(this.onDestroy$))
     .subscribe((res) => {
-      this.country = res[0];
-      this.languages = Object.values(this.country.languages);
+      if(res.length>0) {
+        this.country = res[0];
+        this.languages = Object.values(res[0].languages);
+      }
     });
 
     this.form = this.fb.group ({

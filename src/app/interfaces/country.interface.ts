@@ -14,17 +14,17 @@ export interface Country {
     cca3?: string;
     ccn3?: string;
     cioc?: string;
-    coatOfArms?: object;
+    coatOfArms?: Images;
     continents: Array<any>;
     demonyms?: object;
     fifa?: string;
-    flags?: Flags;
+    flags?: Images;
     idd?: object;
     independent?: string;
     landlocked?: string;
     languages?: object;
     latlng?: Array<any>;
-    maps?: object;
+    maps?: Maps;
     startOfWeek?: string;
     status?: string;
     subregion?: string;
@@ -40,8 +40,13 @@ export interface Name {
     nativeName: object;
 }
 
-export interface Flags {
-    alt: string;
+export interface Images {
+    alt?: string;
     png: string;
     svg: string;
+}
+
+export interface Maps {
+    googleMaps: string;
+    openStreetMaps: string;
 }

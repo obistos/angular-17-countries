@@ -14,13 +14,13 @@
           <div class="flag">{{item.flag}}</div>
           <mat-card-title>{{ item.name.common }}</mat-card-title>
           <mat-card-subtitle>{{ item.name.official }}</mat-card-subtitle>
-          <mat-card-subtitle>Region: {{ item.region }}</mat-card-subtitle>
-          <mat-card-subtitle>Capital: {{ item.capital[0] }}</mat-card-subtitle>
-          <mat-card-subtitle>Population: {{ item.population }}</mat-card-subtitle>
+          <mat-card-subtitle><span>Region:</span> {{ item.region }}</mat-card-subtitle>
+          <mat-card-subtitle><span>Capital:</span> {{ item.capital[0] }}</mat-card-subtitle>
+          <mat-card-subtitle><span>Population:</span> {{ item.population }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-actions align="end">
-          <button mat-button routerLink="/country/{{item.cca2.toLowerCase()}}/view">VIEW</button>
-          <button *ngIf="authService.isAdminUser()" mat-button routerLink="/country/{{item.cca2.toLowerCase()}}/edit">EDIT</button>
+          <button mat-button routerLink="/country/{{item.cca2.toLowerCase()}}/view" [state]="item">VIEW</button>
+          <button *ngIf="authService.isAdminUser()" mat-button routerLink="/country/{{item.cca2.toLowerCase()}}/edit" [state]="item">EDIT</button>
           <button *ngIf="authService.isAdminUser()" mat-button (click)="confirmDeletion(item)">DELETE</button>
         </mat-card-actions>
       </mat-card>
