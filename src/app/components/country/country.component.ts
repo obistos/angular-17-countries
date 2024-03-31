@@ -76,6 +76,15 @@ export class CountryComponent implements OnDestroy {
     })
   }
 
+  getCurrency(item: any) {
+    return Object.keys(item);
+  }
+
+  getCurrencySymbol(item: any) {
+    const currency: string = Object.keys(item)[0];
+    return item[currency];
+  }
+
   saveDetails(): void {
     this.dataService.updateCountryByID(this.country.cca2, this.saveCountry).subscribe()
   }
