@@ -84,9 +84,9 @@
         <p><b>Sub Region:</b> {{country.subregion}}</p>
         <p><b>Capital:</b> {{country.capital[0]}}</p>
         <p><b>Population:</b> {{country.population}}</p>
-        <p><b>Currency:</b> {{getCurrency(country.currencies)}}</p>
-        <p><b>Currency Name:</b> {{getCurrencySymbol(country.currencies)?.name}}</p>
-        <p><b>Currency Symbol:</b> {{getCurrencySymbol(country.currencies)?.symbol}}</p>
+        <p><b>Currency:</b> {{country.currencies ? getCurrency(country.currencies) : '' }}</p>
+        <p><b>Currency Name:</b> {{country.currencies ? getCurrencySymbol(country.currencies)?.name : '' }}</p>
+        <p><b>Currency Symbol:</b> {{country.currencies ? getCurrencySymbol(country.currencies)?.symbol : '' }}</p>
       </div>
     </div>
     <div class="row mt-3">

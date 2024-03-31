@@ -84,15 +84,12 @@ export class CountryComponent implements OnDestroy {
   }
 
   getCurrency(item: any) {
-    const values = Object.keys(item);
-    if(values) return values;
-    else return '';
+    return Object.keys(item);
   }
 
   getCurrencySymbol(item: any) {
     const currency: string = Object.keys(item)[0];
-    if(currency) return item[currency];
-    else return {};
+    return item[currency];
   }
 
   getLanguageTranslation(item: any) {
