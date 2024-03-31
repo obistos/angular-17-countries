@@ -1,6 +1,7 @@
-# Magilla
+# Countries
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+The UI elements were built in Angular Material and Bootstrap v5
 
 ## Pre-requisite
 
@@ -11,7 +12,7 @@ Run `npm install` after cloning this project.
 
 ## Mock Data
 
-I have placed the user details inside src -> app -> assets -> users.json
+I have placed the user details inside `src -> app -> assets -> users.json`
 
 ## Development server
 
