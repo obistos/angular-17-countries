@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 
 import { DataService } from '../../services/data.service';
 import { Country } from '../../interfaces/country.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-country',
@@ -42,11 +43,12 @@ export class CountryComponent implements OnDestroy {
   constructor(
     private fb: FormBuilder, 
     private dataService: DataService, 
-    private route: ActivatedRoute
+    private route: ActivatedRoute, 
+    public authService: AuthService
     ) {
     this.country = history.state;
     this.saveCountry = history.state;
-    
+
     const url = this.route.snapshot.url;
     this.path = url[url.length-1].path;
 

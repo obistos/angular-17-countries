@@ -67,7 +67,7 @@
         <h2>Edit {{country.name.official}}</h2>
       </div>
       <div class="col-md-2 d-flex justify-content-end pe-3">
-        <button mat-flat-button color="primary" routerLink="/country/{{country.cca2.toLowerCase()}}/edit" [state]="country">Edit Country</button>
+        <button *ngIf="authService.isAdminUser()" mat-flat-button color="primary" routerLink="/country/{{country.cca2.toLowerCase()}}/edit" [state]="country">Edit Country</button>
       </div>
     </div>
     <div class="row">
