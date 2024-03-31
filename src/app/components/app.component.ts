@@ -30,7 +30,7 @@ import { ScrollComponent } from '../components/scroll/scroll.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements AfterViewInit {
-  title = 'Magilla';
+  title = 'World Countries';
   showScroll$ = of(false);
   
   constructor(public authService: AuthService) {}
