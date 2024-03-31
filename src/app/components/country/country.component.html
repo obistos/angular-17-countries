@@ -4,7 +4,8 @@
       <h2>Edit {{country.name.official}}</h2>
     </div>
     <div class="col-md-2 d-flex justify-content-end pe-3">
-      <button mat-flat-button color="primary" routerLink="/country/{{country.cca2.toLowerCase()}}/view" [state]="country">View Country</button>
+      <button mat-flat-button color="primary" routerLink="/country/{{country.cca2.toLowerCase()}}/view"
+        [state]="country">View Country</button>
     </div>
   </div>
   <form [formGroup]="form" (ngSubmit)="saveDetails()">
@@ -48,7 +49,8 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label> Sub-Region </mat-label>
-      <input matInput maxlength="15" type="text" placeholder="Type in the subregion" formControlName="subregion" #subregionInput>
+      <input matInput maxlength="15" type="text" placeholder="Type in the subregion" formControlName="subregion"
+        #subregionInput>
       @if (form.get('subregion')?.hasError) {
       <mat-error>{{errorMessage}}</mat-error>
       }
@@ -67,7 +69,8 @@
         <h2>Edit {{country.name.official}}</h2>
       </div>
       <div class="col-md-2 d-flex justify-content-end pe-3">
-        <button *ngIf="authService.isAdminUser()" mat-flat-button color="primary" routerLink="/country/{{country.cca2.toLowerCase()}}/edit" [state]="country">Edit Country</button>
+        <button *ngIf="authService.isAdminUser()" mat-flat-button color="primary"
+          routerLink="/country/{{country.cca2.toLowerCase()}}/edit" [state]="country">Edit Country</button>
       </div>
     </div>
     <div class="row">
@@ -82,21 +85,21 @@
         <p><b>Capital:</b> {{country.capital[0]}}</p>
         <p><b>Population:</b> {{country.population}}</p>
         <p><b>Currency:</b> {{getCurrency(country.currencies)}}</p>
-        <p><b>Currency Name:</b> {{getCurrencySymbol(country.currencies).name}}</p>
-        <p><b>Currency Symbol:</b> {{getCurrencySymbol(country.currencies).symbol}}</p>
+        <p><b>Currency Name:</b> {{getCurrencySymbol(country.currencies)?.name}}</p>
+        <p><b>Currency Symbol:</b> {{getCurrencySymbol(country.currencies)?.symbol}}</p>
       </div>
     </div>
     <div class="row mt-3">
       <div class="col-md-6">
         <mat-card>
           <mat-card-header>
-            <div mat-card-avatar><img src="{{country.coatOfArms?.svg}}" alt="" width="50" height="50"></div>
-            <mat-card-title>Language Translations</mat-card-title>
+            <div mat-card-avatar><img src="{{country.coatOfArms?.svg}}" alt="" width="45" height="45"></div>
+            <mat-card-title>Country Spellings</mat-card-title>
             <mat-card-subtitle>{{country.name.common}}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <ul>
-              <li [ngClass]="country.altSpellings && country.altSpellings.length>5 ? 'content-list' : ''"
+              <li [ngClass]="country.altSpellings && country.altSpellings.length > 5 ? 'content-list' : ''"
                 *ngFor="let item of country.altSpellings">{{item}}</li>
             </ul>
             <p class="no-data" *ngIf="!country.altSpellings">Data not provided for this topic.</p>
@@ -105,7 +108,7 @@
 
         <mat-card>
           <mat-card-header>
-            <div mat-card-avatar><img src="{{country.coatOfArms?.svg}}" alt="" width="50" height="50"></div>
+            <div mat-card-avatar><img src="{{country.coatOfArms?.svg}}" alt="" width="45" height="45"></div>
             <mat-card-title>Spoken Languages</mat-card-title>
             <mat-card-subtitle>{{country.name.common}}</mat-card-subtitle>
           </mat-card-header>
@@ -121,13 +124,13 @@
       <div class="col-md-6">
         <mat-card>
           <mat-card-header>
-            <div mat-card-avatar><img src="{{country.coatOfArms?.svg}}" alt="" width="50" height="50"></div>
+            <div mat-card-avatar><img src="{{country.coatOfArms?.svg}}" alt="" width="45" height="45"></div>
             <mat-card-title>Neighbouring Countries</mat-card-title>
             <mat-card-subtitle>{{country.name.common}}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <ul>
-              <li [ngClass]="country.borders && country.borders.length>5 ? 'content-list' : ''"
+              <li [ngClass]="country.borders && country.borders.length > 5 ? 'content-list' : ''"
                 *ngFor="let item of country.borders">{{item}}</li>
             </ul>
             <p class="no-data" *ngIf="!country.borders">Data not provided for this topic.</p>
@@ -136,7 +139,7 @@
 
         <mat-card>
           <mat-card-header>
-            <div mat-card-avatar><img src="{{country.coatOfArms?.svg}}" alt="" width="50" height="50"></div>
+            <div mat-card-avatar><img src="{{country.coatOfArms?.svg}}" alt="" width="45" height="45"></div>
             <mat-card-title>Maps</mat-card-title>
             <mat-card-subtitle>{{country.name.common}}</mat-card-subtitle>
           </mat-card-header>
@@ -147,6 +150,26 @@
               <li><a href="{{country.maps?.googleMaps}}" routerLinkActive="router-link-active" target="_blank">Google
                   Maps</a></li>
             </ul>
+            <p class="no-data" *ngIf="!country.maps">Data not provided for this topic.</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-md-12">
+        <mat-card>
+          <mat-card-header>
+            <div mat-card-avatar><img src="{{country.coatOfArms?.svg}}" alt="" width="45" height="45"></div>
+            <mat-card-title>Language Translations</mat-card-title>
+            <mat-card-subtitle>{{country.name.common}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-md-3 translations-block" *ngFor="let item of getLanguageTranslation(country.translations)">
+                <p class="translations-title">{{item.name}}</p>
+                <p>{{item.common}}</p>
+                <p>{{item.official}}</p>
+              </div>
+            </div>
             <p class="no-data" *ngIf="!country.maps">Data not provided for this topic.</p>
           </mat-card-content>
         </mat-card>

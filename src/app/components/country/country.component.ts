@@ -57,7 +57,7 @@ export class CountryComponent implements OnDestroy {
     .subscribe((res) => {
       if(res.length>0) {
         this.country = res[0];
-        this.languages = Object.values(res[0].languages);
+        this.languages = Object.values(res[0].languages) ?? [];
       }
     });
 
@@ -84,12 +84,26 @@ export class CountryComponent implements OnDestroy {
   }
 
   getCurrency(item: any) {
-    return Object.keys(item);
+    const values = Object.keys(item);
+    if(values) return values;
+    else return '';
   }
 
   getCurrencySymbol(item: any) {
     const currency: string = Object.keys(item)[0];
-    return item[currency];
+    if(currency) return item[currency];
+    else return {};
+  }
+
+  getLanguageTranslation(item: any) {
+    let data: any = [];
+    if(item) {
+      const currencies = Object.keys(item);
+      currencies.forEach((el) => {
+        data.push({name: el, ...item[el]})
+      });
+    }
+    return data;
   }
 
   saveDetails(): void {

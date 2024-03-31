@@ -56,6 +56,16 @@ mat-card {
   float: left;
 }
 
+.translations-block {
+  padding-left: 15px;
+  border-bottom: 1px solid #f1f1f1;
+
+  .translations-title {
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+}
+
 .no-data {
   margin-left: 15px;
 }
