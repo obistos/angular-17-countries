@@ -1,7 +1,10 @@
 # Countries
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
-The UI elements were built in Angular Material and Bootstrap v5
+* This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+* The UI elements were built in Angular Material and Bootstrap v5
+
+## Background
+This project was built as an assessment to illustrate the use of Angular 17 with the Standalone Components architecture.
 
 ## Pre-requisite
 
