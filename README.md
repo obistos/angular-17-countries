@@ -2,7 +2,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2. The UI elements were built in Angular Material and Bootstrap v5
 
 ## Background
-This project was built as an assessment to illustrate the use of Angular 17 with the Standalone Components architecture.
+This project was built as an assessment to illustrate the use of Angular 17 with the Standalone Components architecture. Find more information about the assessment from the [FE - Coding Challenge.pdf](https://github.com/obistos/angular-17-countries/blob/master/FE%20-%20Code%20Challenge.pdf) document which is included in this repo.
 
 ## Pre-requisite
 Please make sure that you have nodejs installed on your machine.
