@@ -1,19 +1,19 @@
 [
     {
         "username": "admin",
-        "email": "admin@magilla.io",
+        "email": "admin@provisionartz.co.za",
         "password": "Pass11",
         "role": "Admin"
     },
     {
         "username": "obed",
-        "email": "obed@magilla.io",
+        "email": "obed@provisionartz.co.za",
         "password": "OR1",
         "role": "Admin"
     },
     {
         "username": "operator",
-        "email": "operator@magilla.io",
+        "email": "operator@provisionartz.co.za",
         "password": "Pass12",
         "role": "Operator"
     }

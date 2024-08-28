@@ -42,11 +42,10 @@ export class AuthService {
     const encodedPlayload = btoa(JSON.stringify(details))
     const HMACSHA256 = (stringToSign = '', secret = '') => "not_implemented"
     
-    const signature = HMACSHA256(`${encodedHeaders}.${encodedPlayload}`, "MG")
+    const signature = HMACSHA256(`${encodedHeaders}.${encodedPlayload}`, "OR")
     const encodedSignature = btoa(signature)
 
     const jwt = `${encodedHeaders}.${encodedPlayload}.${encodedSignature}`
-    console.log({jwt})
     return jwt;
   }
 
